@@ -10,6 +10,9 @@ const Auth = new mongoose.Schema({
   profileImg: {
     type: String,
   },
+  imgFileName: {
+    type: String,
+  },
   email: {
     type: String,
     required: [true, "Please Provide Email Address"],
