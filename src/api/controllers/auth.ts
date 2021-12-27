@@ -172,7 +172,7 @@ export const profileImg = async (
 
   const update: any = {
     profileImg: isUpload
-      ? `http://localhost:8000/peoples/images/${req.file?.filename}`
+      ? `${process.env.HOST_URL}/peoples/images/${req.file?.filename}`
       : "",
     imgFileName: isUpload ? req.file?.filename : "",
   };
