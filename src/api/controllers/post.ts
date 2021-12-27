@@ -73,7 +73,7 @@ export const createPost = async (
     postParagraph,
     tags: selectedTags,
     postImg: req?.file?.filename
-      ? `${process.env.HOST_URL}/post/images/${req.file?.filename} `
+      ? `${process.env.HOST_URL}/post/images/${req.file?.filename}`
       : "",
     imgFileName: req.file?.filename,
   };
@@ -98,7 +98,7 @@ export const updatePost = async (
     postParagraph,
     postType,
     postImg: req?.file?.filename
-      ? `${process.env.HOST_URL}/post/images/${req.file?.filename} `
+      ? `${process.env.HOST_URL}/post/images/${req.file?.filename}`
       : "",
     imgFileName: req.file?.filename,
   };
