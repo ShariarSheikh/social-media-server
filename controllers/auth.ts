@@ -155,7 +155,7 @@ export const deleteAccount = async (
 
     if (isDelete) {
       await PostDB.deleteMany({ posterProfileId });
-      return next();
+      return;
     }
     res.status(200).json({ success: true, message: "Your Account deleted" });
   } catch (error: any) {

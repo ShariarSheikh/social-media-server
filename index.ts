@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import authRouter from "./api/routes/auth";
-import post from "./api/routes/post";
-import connectDB from "./config/connectDB";
+import post from "./routes/post";
+import auth from "./routes/auth";
 import { User } from "./interface/interface";
-import isApiReqValid from "./api/middleware/isApiReqValid";
+import connectDB from "./config/connectDB";
+import isApiReqValid from "./middleware/isApiReqValid";
 
 require("dotenv").config();
 
@@ -33,7 +33,7 @@ app.use(express.json({ limit: "50mb" }));
 const PORT = process.env.PORT;
 
 //router -------------------------- authentication
-app.use("/auth", isApiReqValid, authRouter);
+app.use("/auth", isApiReqValid, auth);
 
 //router -------------------------- api
 app.use("/api", isApiReqValid, post);
