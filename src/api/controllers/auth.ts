@@ -172,7 +172,7 @@ export const profileImg = async (
 
   const update: any = {
     profileImg: isUpload
-      ? `${process.env.HOST_URL}/peoples/images/${req.file?.filename}`
+      ? `${process.env.HOST_URL}/peoples/${req.file?.filename}`
       : "",
     imgFileName: isUpload ? req.file?.filename : "",
   };
@@ -184,7 +184,7 @@ export const profileImg = async (
         .json({ success: false, message: "Not found with this id" });
     } else {
       if (imagesFileName) {
-        await unlink(`upload/peoples/images/${imagesFileName}`, (err) => {
+        await unlink(`upload/peoples/${imagesFileName}`, (err) => {
           if (err) {
             console.log(err);
             return;
@@ -196,20 +196,19 @@ export const profileImg = async (
         new: true,
       });
 
-      if (!updateImg) {
-        await unlink(`upload/peoples/images/${req.file?.filename}`, (err) => {
+      if (!updateImg?.email) {
+        await unlink(`upload/peoples/${req.file?.filename}`, (err) => {
           if (err) {
             return res
               .status(404)
               .json({ success: false, message: "Not found with this id" });
           }
         });
-      } else {
-        sendToken(updateImg, 200, res);
       }
+      sendToken(updateImg, 200, res);
     }
   } catch (error: any) {
-    await unlink(`upload/peoples/images/${req.file?.filename}`, (err) => {
+    await unlink(`upload/peoples/${req.file?.filename}`, (err) => {
       if (err) {
         console.log(err);
       }

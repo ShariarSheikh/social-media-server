@@ -73,14 +73,14 @@ export const createPost = async (
     postParagraph,
     tags: selectedTags,
     postImg: req?.file?.filename
-      ? `${process.env.HOST_URL}/post/images/${req.file?.filename}`
+      ? `${process.env.HOST_URL}/post/${req.file?.filename}`
       : "",
     imgFileName: req.file?.filename,
   };
 
   try {
     const isUpload = await PostDB.create(post);
-    res.status(200).json({ success: true, data: isUpload });
+    res.status(200).json({ success: true, data: isUpload});
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -98,7 +98,7 @@ export const updatePost = async (
     postParagraph,
     postType,
     postImg: req?.file?.filename
-      ? `${process.env.HOST_URL}/post/images/${req.file?.filename}`
+      ? `${process.env.HOST_URL}/post/${req.file?.filename}`
       : "",
     imgFileName: req.file?.filename,
   };
@@ -116,7 +116,7 @@ export const updatePost = async (
 
     idUpdate &&
       imgFileName &&
-      (await unlink(`upload/post/images/${imgFileName}`, (err) => {
+      (await unlink(`upload/post/${imgFileName}`, (err) => {
         if (err) {
           console.log(err);
           return;
@@ -149,7 +149,7 @@ export const deletePost = async (
     }
     await PostDB.findByIdAndDelete(postId);
 
-    await unlink(`upload/post/images/${fileName}`, (err) => {
+    await unlink(`upload/post/${fileName}`, (err) => {
       if (err) {
         console.error(err);
         return;
