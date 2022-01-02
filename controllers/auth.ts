@@ -150,14 +150,15 @@ export const deleteAccount = async (
         .status(404)
         .json({ success: false, message: "Not found with this id" });
     }
-
     const isDelete = await AuthModel.findByIdAndDelete(id);
 
-    if (isDelete) {
-      await PostDB.deleteMany({ posterProfileId });
-      return;
+    if (!isDelete) {
+      return res.status(404).json({ success: false, message: "Can't delete" });
     }
-    res.status(200).json({ success: true, message: "Your Account deleted" });
+    const response = await PostDB.deleteMany({ posterProfileId });
+
+    response &&
+      res.status(200).json({ success: true, message: "Your Account deleted" });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
   }

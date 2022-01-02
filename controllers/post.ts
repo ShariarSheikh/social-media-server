@@ -80,7 +80,7 @@ export const createPost = async (
 
   try {
     const isUpload = await PostDB.create(post);
-    res.status(200).json({ success: true, data: isUpload});
+    res.status(200).json({ success: true, data: isUpload });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
